@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="recyclerImageHeight">100dp</dimen>
+    <dimen name="recyclerImageWidth">160dp</dimen>
+    <dimen name="textviewname">18sp</dimen>
+    <dimen name="textviewextradata">16sp</dimen>
+    <dimen name="activitytitletext">24sp</dimen>
+    <dimen name="edittextall">20sp</dimen>
+    <dimen name="submitbuttontoolbar">20sp</dimen>
+    <dimen name="submitbutton">24sp</dimen>
+    <dimen name="projectsubmission">24sp</dimen>
+
+</resources>
