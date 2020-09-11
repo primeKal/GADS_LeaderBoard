@@ -10,8 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:paddingHorizontal="20dp"
+        android:padding="1dp"
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="10dp">
 
@@ -39,7 +38,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/failure"
-                android:textSize="@dimen/submitbutton"
+                android:textSize="@dimen/edittextall"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

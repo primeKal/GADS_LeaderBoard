@@ -38,14 +38,12 @@ public class TabLayOut extends AppCompatActivity {
 
 
 
-        ArrayList<String> tabtitles=new ArrayList<>();
-        tabtitles.add("Skill Iq Score");
-        tabtitles.add("Learning Hours");
-        preparetheviewpager(tabtitles,kViewPager);
+
+        preparetheviewpager(kViewPager);
         kTabLayout.setupWithViewPager(kViewPager);
     }
 
-    private void preparetheviewpager(ArrayList<String> tabtitles, ViewPager viewPager) {
+    private void preparetheviewpager(ViewPager viewPager) {
         TabPagerAdapter myadapter=new TabPagerAdapter(getSupportFragmentManager());
         myadapter.addFragment("Learning Leaders",new SecondFragment());
        myadapter.addFragment("Skill Iq Leaders",new FirstFragment());
