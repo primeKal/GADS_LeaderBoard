@@ -17,7 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
 
             <ImageView
@@ -36,6 +37,8 @@
                 android:id="@+id/love"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/successfulsubmission"
                 android:textSize="@dimen/submitbutton"
                 app:layout_constraintBottom_toBottomOf="parent"

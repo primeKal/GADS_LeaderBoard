@@ -45,12 +45,11 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
                 kUsers.get(position).getCountry();}
         else  {
             extras=kUsers.get(position).getScore()+
-                    "Skill score, " +
+                    " Skill score, " +
             kUsers.get(position).getCountry();
         }
         holder.kextradata.setText(extras);
         Glide.with(kContext).load(kUsers.get(position).getBadgeUrl()).into(holder.kIMage);
-
 
     }
 

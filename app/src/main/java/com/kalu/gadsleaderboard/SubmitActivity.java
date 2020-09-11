@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +29,7 @@ public class SubmitActivity extends AppCompatActivity {
     EditText kName,kLastname,kEmail,kGitlink;
     Dialog kDialog;
     Toolbar kToolbar;
+    Context kContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class SubmitActivity extends AppCompatActivity {
         kLastname=findViewById(R.id.lastname);
         kName=findViewById(R.id.firstname);
         kGitlink=findViewById(R.id.gitlink);
+        kContext=getApplicationContext();
 
 
         kSubmit=findViewById(R.id.submitbutton);
@@ -81,7 +84,7 @@ public class SubmitActivity extends AppCompatActivity {
 
     private void intiateformsubmission(Project myproject) {
         //where we call retrofit service builder and enque the call
-        kDialog.dismiss();
+
         JsonService myjsonservice=ServiceBuilder.buildservice(JsonService.class);
         Call<Project> mycall=myjsonservice.setProject(myproject.getFirstname(),
                 myproject.getEmailaddress(),
@@ -90,7 +93,8 @@ public class SubmitActivity extends AppCompatActivity {
         mycall.enqueue(new Callback<Project>() {
             @Override
             public void onResponse(Call<Project> call, Response<Project> response) {
-                Dialog my=new Dialog(getApplicationContext());
+                Dialog my=new Dialog(kDialog.getContext());
+                kDialog.dismiss();
                 my.setContentView(R.layout.succes_dialgue);
                 my.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 my.show();
@@ -98,18 +102,19 @@ public class SubmitActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Project> call, Throwable t) {
-                Dialog my=new Dialog(getApplicationContext());
+                Dialog my=new Dialog(kDialog.getContext());
+                kDialog.dismiss();
                 my.setContentView(R.layout.submissionfailure);
                 my.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 my.show();
 
             }
         });
-
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         startActivity(new Intent(this,TabLayOut.class));
     }
 }

@@ -38,6 +38,7 @@
                 android:background="@drawable/yesbutton_bg"
                 android:text="@string/yess"
                 android:textColor="@color/colorsubmitproject"
+                android:textColorHighlight="@color/colorAccent"
                 android:textSize="@dimen/edittextall"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
