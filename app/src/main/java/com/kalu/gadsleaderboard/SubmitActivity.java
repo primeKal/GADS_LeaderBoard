@@ -4,16 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kalu.gadsleaderboard.Models.Project;
+import com.kalu.gadsleaderboard.Utility.JsonService;
+import com.kalu.gadsleaderboard.Utility.ServiceBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SubmitActivity extends AppCompatActivity {
     Button kSubmit,kYsbutton;
@@ -35,6 +43,7 @@ public class SubmitActivity extends AppCompatActivity {
         kName=findViewById(R.id.firstname);
         kGitlink=findViewById(R.id.gitlink);
 
+
         kSubmit=findViewById(R.id.submitbutton);
         kSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +60,13 @@ public class SubmitActivity extends AppCompatActivity {
         kDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         kDialog.show();
        kYsbutton=kDialog.findViewById(R.id.yesbutton);
+        ImageButton close=kDialog.findViewById(R.id.imageView3close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kDialog.dismiss();
+            }
+        });
        kYsbutton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -66,11 +82,34 @@ public class SubmitActivity extends AppCompatActivity {
     private void intiateformsubmission(Project myproject) {
         //where we call retrofit service builder and enque the call
         kDialog.dismiss();
-        Dialog my=new Dialog(this);
-        my.setContentView(R.layout.succes_dialgue);
-        my.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        my.show();
-        TextView s=my.findViewById(R.id.love);
-        s.setText(myproject.getEmailaddress());
+        JsonService myjsonservice=ServiceBuilder.buildservice(JsonService.class);
+        Call<Project> mycall=myjsonservice.setProject(myproject.getFirstname(),
+                myproject.getEmailaddress(),
+                myproject.getLastname(),
+                myproject.getGithublink());
+        mycall.enqueue(new Callback<Project>() {
+            @Override
+            public void onResponse(Call<Project> call, Response<Project> response) {
+                Dialog my=new Dialog(getApplicationContext());
+                my.setContentView(R.layout.succes_dialgue);
+                my.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                my.show();
+            }
+
+            @Override
+            public void onFailure(Call<Project> call, Throwable t) {
+                Dialog my=new Dialog(getApplicationContext());
+                my.setContentView(R.layout.submissionfailure);
+                my.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                my.show();
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,TabLayOut.class));
     }
 }

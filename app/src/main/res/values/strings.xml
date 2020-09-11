@@ -20,4 +20,5 @@
     <string name="yess">Yes</string>
     <string name="Noo">No</string>
     <string name="successfulsubmission">Submission Succesful</string>
+    <string name="failure">Submission not Succesfull</string>
 </resources>

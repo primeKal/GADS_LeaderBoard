@@ -49,7 +49,6 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
             kUsers.get(position).getCountry();
         }
         holder.kextradata.setText(extras);
-        holder.kIMage.setImageResource(R.drawable.iqskill);
         Glide.with(kContext).load(kUsers.get(position).getBadgeUrl()).into(holder.kIMage);
 
 
